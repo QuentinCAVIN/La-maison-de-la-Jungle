@@ -1,0 +1,14 @@
+.lmj-cart {
+    background-color: #31b572;
+    padding: 32px;
+    color: white;
+    
+}
+
+/*Ici, vous allez devoir styliser votre panier. Pour ça, créez d’abord une classe  lmj-cart. Votre panier doit avoir :
+
+un padding de 32 px ;
+
+du texte blanc ;
+
+et un background-color à #31b572.*/
