@@ -1,4 +1,5 @@
 import { plantList } from "../datas/plantList";
+import PlantItem from "./PlantItem";
 import "../styles/ShoppingList.css";
 
 function ShoppingList() {
@@ -19,20 +20,25 @@ function ShoppingList() {
         ))}
       </ul>
       <ul className="lmj-plant-list">
-        {plantList.map((plant) => (
-          <li key={`${plant.id}`} className="lmj-plant-item">
-            {plant.name}
-            {plant.isSpecialOffer ? (
-              <div className="lmj-sales">SOLDE</div>
-            ) : null}
-          </li>
-        ))}
+        {plantList.map(
+          ({ name, cover, id, light, water } /*à la place de (plant)*/) => (
+            // On utilise la déstructuration({propriété1 , propriété3}) pour récupérer directement les propriétés utiles de "plant"
+            // On simplifie ainsi la syntaxe en évitant d'écrire name=plant.name
+            <PlantItem // Ici on utilise des props pour pouvoir passer des élément au composant PlantItem
+              name={name}
+              cover={cover}
+              id={id}
+              light={light}
+              water={water}
+            />
+          )
+        )}
       </ul>
     </div>
   );
 }
 
-//Solution proposé par le cours :
+//Solution proposé par le cours avec .reduce() :
 
 //.reduce() est utilsié pour extraire les categories de plantes unique
 // l'accumulateur (acc) est un parmatétre qui va pouvoir evoluer a chaque callback de la methode
@@ -64,17 +70,3 @@ function ShoppingList() {
 */
 
 export default ShoppingList;
-
-/*
-
-À partir de cette liste de plantes, vous devrez :
-
-Constituer une nouvelle liste de manière dynamique qui extrait les catégories uniques de plantes (que nous utiliserons également plus tard). 
-
-Il existe plusieurs solutions pour créer une liste d'éléments uniques, mais je vous conseille de vous pencher sur la méthode reduce()  ou bienforEach().
-
-Afficher la liste des catégories de plantes au-dessus de la liste des plantes à vendre.
-
-Attention à votre  key !
-
-*/
