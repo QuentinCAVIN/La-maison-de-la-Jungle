@@ -1,7 +1,8 @@
 import Banner from "./Banner";
 import logo from "../assets/logo.png";
-import Cart from "./Cart";
+import Cart from "./Cart.js";
 import ShoppingList from "./ShoppingList";
+import QuestionFormNonControlle from "./QuestionFormNonControlle.js";
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
       </Banner>
       <Cart />
       <ShoppingList />
+      <QuestionFormNonControlle />
     </div>
   );
 }
