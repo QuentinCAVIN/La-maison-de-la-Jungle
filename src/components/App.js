@@ -3,6 +3,7 @@ import logo from "../assets/logo.png";
 import Cart from "./Cart.js";
 import ShoppingList from "./ShoppingList";
 import QuestionFormNonControlle from "./QuestionFormNonControlle.js";
+import QuestionFormControlle from "./QuestionFormControlle.js";
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
       <Cart />
       <ShoppingList />
       <QuestionFormNonControlle />
+      <QuestionFormControlle />
     </div>
   );
 }

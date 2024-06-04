@@ -22,7 +22,7 @@ function CareScale(props) {
     );
 
   return (
-    <div>
+    <div onClick={handleClick}>
       {range.map((rangeElem) =>
         scaleValue >= rangeElem ? (
           <span key={rangeElem.toString()}>{scaleType}</span>
@@ -30,6 +30,11 @@ function CareScale(props) {
       )}
     </div>
   );
+}
+
+function handleClick(e) {
+  // Reprendre ICI pour générer une alerte qui dira ""Cette plante requiert peu/modérement/beaucoup de lumière/d'arrosage""
+  alert("alert");
 }
 
 export default CareScale;
