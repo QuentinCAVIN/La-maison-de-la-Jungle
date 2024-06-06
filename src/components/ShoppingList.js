@@ -2,18 +2,39 @@ import { plantList } from "../datas/plantList";
 import PlantItem from "./PlantItem";
 import "../styles/ShoppingList.css";
 
-function ShoppingList() {
+function ShoppingList({ cart, updateCart }) {
   // On récupére toutes les catégories dans une liste
   const categories = plantList.map((plant) => plant.category);
   // On filtre cette liste pour garder uniquement un élément
-  const categoriesUnique = plantList
-    .map((plant) => plant.category)
-    .filter(
-      (category, i) => categories.indexOf(category) === i //IndexOf renvoie l'index du premier (category) rencontré
-    );
+  const categoriesUnique = categories.filter(
+    (category, i) => categories.indexOf(category) === i //IndexOf renvoie l'index du premier (category) rencontré
+  );
+
+  function addToCart(name, price) {
+    const currentPlantSaved = cart.find((plant) => plant.name === name);
+    //Si la plante ajouté est déja dans le panier...
+    if (currentPlantSaved) {
+      // ... on crée une nouvelle liste du contenue du panier en retirant la plante déja présente...
+      const cartFilteredCurrentPlant = cart.filter(
+        (plant) => plant.name !== name
+      );
+      //... et on rajoute au panier la plante retirée en augmentant sa quantité de 1
+      updateCart([
+        ...cartFilteredCurrentPlant, //utilisation du spread operator pour ajouter tout les élément du tableau...
+        /*...avec un element en plus: */ {
+          name,
+          price,
+          amount: currentPlantSaved.amount + 1,
+        },
+      ]);
+    } else {
+      // si la plante ajouté n'est pas dans le panier, on l'ajoute ici
+      updateCart([...cart, { name, price, amount: 1 }]);
+    }
+  }
 
   return (
-    <div>
+    <div className="lmj-shopping-list">
       <ul>
         {categoriesUnique.map((category) => (
           <li key={`${category}`}> {category} </li>
@@ -21,16 +42,22 @@ function ShoppingList() {
       </ul>
       <ul className="lmj-plant-list">
         {plantList.map(
-          ({ name, cover, id, light, water } /*à la place de (plant)*/) => (
+          (
+            { name, cover, id, light, water, price } /*à la place de (plant)*/
+          ) => (
             // On utilise la déstructuration({propriété1 , propriété3}) pour récupérer directement les propriétés utiles de "plant"
             // On simplifie ainsi la syntaxe en évitant d'écrire name=plant.name
-            <PlantItem // Ici on utilise des props pour pouvoir passer des élément au composant PlantItem
-              name={name}
-              cover={cover}
-              id={id}
-              light={light}
-              water={water}
-            />
+
+            <div key={id}>
+              <PlantItem // Ici on utilise des props pour pouvoir passer des élément au composant PlantItem
+                name={name}
+                cover={cover}
+                light={light}
+                water={water}
+                price={price}
+              />
+              <button onClick={() => addToCart(name, price)}>Ajouter</button>
+            </div>
           )
         )}
       </ul>

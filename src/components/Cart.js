@@ -1,13 +1,20 @@
 import "../styles/Cart.css";
 import { useState } from "react";
 
-function Cart() {
-  const monsteraPrice = 8;
-  // Avec cette ligne, on stocke dans "cart" la valeur du "local state" (useState) lié au composant Cart.
-  // "updateCart" est une fonction (nommée librement) fournie par React qui permet de modifier la valeur de "cart".
-  // Enfin, useState(0) permet d'initialiser la valeur de l'état avec 0, qui peut être un nombre, un booléen, ou une chaîne.
-  const [cart, updateCart] = useState(0);
+function Cart({ cart, updateCart }) {
+  // on récupére avec la destructuration les props passé dans App
+  const monsteraPrice = 8; // EFFACER
+  // Avec cette ligne, on stocke dans "isOpen" la valeur du "local state" (useState) lié au composant Cart.
+  // "setIsOpen" est une fonction (nommée librement) fournie par React qui permet de modifier la valeur de "isOpen".
+  // Enfin, useState(false) permet d'initialiser la valeur de l'état avec false, qui peut être un nombre, un booléen, ou une chaîne.
   const [isOpen, setIsOpen] = useState(false);
+
+  // Calcul du total du panier en multipliant la quantité de chaque type de plante par son prix et en ajoutant ces montants.
+  // - L'accumulateur `acc` stocke le montant total en cours. `plantType` représente chaque type de plante dans le panier
+  const total = cart.reduce(
+    (acc, plantType) => acc + plantType.amount * plantType.price,
+    0
+  );
 
   return isOpen ? (
     <div className="lmj-cart">
@@ -17,11 +24,16 @@ function Cart() {
       >
         Fermer le panier
       </button>
+
       <h2>Panier</h2>
-      <div>
-        Monstera : {monsteraPrice}€
-        <button onClick={() => updateCart(cart + 1)}>Ajouter</button>
-      </div>
+      <ul>
+        {cart.map(({ name, amount, price }, index) => (
+          <div key={`${name}-${index}`}>
+            {" "}
+            {name} {price}€ x {amount}
+          </div>
+        ))}
+      </ul>
       <h3>Total : {monsteraPrice * cart}€</h3>
       <button onClick={() => updateCart(0)}> Vider le panier</button>
     </div>
