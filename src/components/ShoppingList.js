@@ -33,6 +33,27 @@ function ShoppingList({ cart, updateCart }) {
     }
   }
 
+  function removeToCart(name, price) {
+    const currentPlantSaved = cart.find((plant) => plant.name === name);
+    // ... on crée une nouvelle liste du contenue du panier en retirant la plante déja présente...
+    const cartFilteredCurrentPlant = cart.filter(
+      (plant) => plant.name !== name
+    );
+    if (currentPlantSaved.amount > 1) {
+      //... et on rajoute au panier la plante retirée en augmentant sa quantité de 1
+      updateCart([
+        ...cartFilteredCurrentPlant, //utilisation du spread operator pour ajouter tout les élément du tableau...
+        /*...avec un element en plus: */ {
+          name,
+          price,
+          amount: currentPlantSaved.amount - 1,
+        },
+      ]);
+    } else {
+      updateCart(cartFilteredCurrentPlant);
+    }
+  }
+
   return (
     <div className="lmj-shopping-list">
       <ul>
@@ -57,6 +78,11 @@ function ShoppingList({ cart, updateCart }) {
                 price={price}
               />
               <button onClick={() => addToCart(name, price)}>Ajouter</button>
+              {cart.some((plant) => plant.name === name) ? ( // some retourne true si au moins un élément du tableau satisfait la condition spécifiée dans la fonction callback
+                <button onClick={() => removeToCart(name, price)}>
+                  Retirer
+                </button>
+              ) : null}
             </div>
           )
         )}
