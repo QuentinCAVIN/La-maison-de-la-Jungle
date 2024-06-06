@@ -4,6 +4,7 @@ import Cart from "./Cart.js";
 import ShoppingList from "./ShoppingList";
 import QuestionFormNonControlle from "./QuestionFormNonControlle.js";
 import QuestionFormControlle from "./QuestionFormControlle.js";
+import Footer from "./footer.js";
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
       <ShoppingList />
       <QuestionFormNonControlle />
       <QuestionFormControlle />
+      <Footer />
     </div>
   );
 }
