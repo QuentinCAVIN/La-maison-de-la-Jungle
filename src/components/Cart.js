@@ -3,7 +3,6 @@ import { useState } from "react";
 
 function Cart({ cart, updateCart }) {
   // on récupére avec la destructuration les props passé dans App
-  const monsteraPrice = 8; // EFFACER
   // Avec cette ligne, on stocke dans "isOpen" la valeur du "local state" (useState) lié au composant Cart.
   // "setIsOpen" est une fonction (nommée librement) fournie par React qui permet de modifier la valeur de "isOpen".
   // Enfin, useState(false) permet d'initialiser la valeur de l'état avec false, qui peut être un nombre, un booléen, ou une chaîne.
@@ -34,8 +33,8 @@ function Cart({ cart, updateCart }) {
           </div>
         ))}
       </ul>
-      <h3>Total : {monsteraPrice * cart}€</h3>
-      <button onClick={() => updateCart(0)}> Vider le panier</button>
+      <h3>Total : {total}€</h3>
+      <button onClick={() => updateCart([])}> Vider le panier</button>
     </div>
   ) : (
     <div className="lmj-cart-closed">

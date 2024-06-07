@@ -12,6 +12,7 @@ function App() {
   // ainsin on peut partager un local state entre plusieurs composant
   //voir le détail de la syntaxe dans "Cart"
   const [cart, updateCart] = useState([]);
+
   return (
     // On utilise différents composant : Cart, ShoppingList, Banner
     <div>
