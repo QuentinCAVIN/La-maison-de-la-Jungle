@@ -21,7 +21,6 @@ function ShoppingList({ cart, updateCart }) {
     plantFiltredByCategory = plantList.filter(
       (plant) => plant.category === categorieSelected
     );
-    console.log(plantFiltredByCategory);
   }
 
   return (

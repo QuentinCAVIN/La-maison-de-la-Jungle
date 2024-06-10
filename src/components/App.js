@@ -6,13 +6,28 @@ import ShoppingList from "./ShoppingList";
 import QuestionFormNonControlle from "./QuestionFormNonControlle.js";
 import QuestionFormControlle from "./QuestionFormControlle.js";
 import Footer from "./footer.js";
+import { useEffect } from "react";
 
 function App() {
   // On conserve le local state de cart dans le composant parent, et on le fais redescendre via les props dans les composant enfants
   // ainsin on peut partager un local state entre plusieurs composant
   //voir le détail de la syntaxe dans "Cart"
-  const [cart, updateCart] = useState([]);
 
+  const cartSave = window.localStorage.getItem("cart");
+  const [cart, updateCart] = useState(cartSave ? JSON.parse(cartSave) : []); // On définit le userState à partir du local storage
+
+  //On utilise useEffect pour sauvegarder le contenu de cart dans le local Storage...
+  useEffect(() => {
+    const cartSave = JSON.stringify(cart);
+    window.localStorage.setItem("cart", cartSave);
+  }, [cart]); // ... à chaque modification de cart
+  // Si on retire le crochet la fonction est éxécuté à chaque rendu de "App"
+  // Si le crochet est vide la fonction est éxécuté au premier rendu de  "App"
+
+  /*
+                  const valeurAvis = JSON.stringify(avis);
+                window.localStorage.setItem(`${id}/avis`, valeurAvis);
+  */
   return (
     // On utilise différents composant : Cart, ShoppingList, Banner
     <div>
