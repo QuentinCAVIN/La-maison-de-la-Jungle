@@ -1,3 +1,9 @@
+# Présentation
+
+Site de vente de plantes créé avec React. Initiation au fonctionnement de React et à la syntaxe JSX. création des bases de l'application avec Create React App, ajout du style, et du contenu. utilisation du state et des effets de bord, afin de rendre l’application interactive pour l’utilisateur. 
+
+
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
